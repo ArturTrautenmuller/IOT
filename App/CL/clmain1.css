@@ -1,0 +1,74 @@
+#work{
+	width: 360px;
+	height: 140px;
+	background-color: grey;
+	margin-left: 300px;
+	border-radius: 100px;
+	font-size: 40px;	
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+#setTemp{
+	width: 580px;
+	margin-left: 192px;
+	background-color: black;
+	margin-top: 60px;
+}
+#displayT{
+	margin-top: 50px;
+	margin-left: 357px;
+	width: 230px;
+	height: 200px;
+	background-color: #ddd;
+	border-style: solid;
+	border-color: black;
+	border-radius: 170px;
+	font-size: 95px;
+	padding-top: 50px;
+	padding-left: 20px;
+}
+#displayU{
+	margin-top: 50px;
+	margin-left: 357px;
+	width: 230px;
+	height: 200px;
+	background-color: #ddd;
+	border-style: solid;
+	border-color: black;
+	border-radius: 170px;
+	font-size: 95px;
+	padding-top: 50px;
+	padding-left: 20px;
+}
+
+#displayST{
+	margin-top: 50px;
+	margin-left: 357px;
+	width: 230px;
+	height: 200px;
+	background-color: #ddd;
+	border-style: solid;
+	border-color: black;
+	border-radius: 170px;
+	font-size: 95px;
+	padding-top: 50px;
+	padding-left: 20px;
+}
+
+#set{
+	margin-left: 412px;
+	margin-top: 50px;
+	width: 140px;
+	height: 90px;
+	font-size: 40px;
+}
+#config{
+	width: 360px;
+	height: 140px;
+	background-color: grey;
+	margin-left: 300px;
+	border-radius: 100px;
+	font-size: 40px;	
+	margin-bottom: 30px;
+	margin-top: 100px;
+}

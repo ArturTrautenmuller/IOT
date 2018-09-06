@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		Control
+	</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	
+	<button id="l1" onclick="navigate('L1/lamp1.html')">Lampada</button><br><br>
+	
+	<button id="cl" onclick="navigate('CL/clima.html')">Clima</button><br><br>
+
+	<button id="pt" onclick="navigate('Pt/Pt.html')">Portão</button><br><br>
+
+
+	
+
+	<label>Ip:</label>
+	<input type="text" id="ipt">
+	<button id="set" onclick="set()">Set</button>
+	<label id="res"></label>
+
+<script >
+	var w = window.innerWidth - 15;
+	var wid = ""
+	wid += w;
+	wid += "px";
+	var button1  = document.getElementById("l1");
+	var button2  = document.getElementById("l2");
+	var button3  = document.getElementById("l3");
+	var button4  = document.getElementById("cl");
+	//button1.style.width = wid;
+	//button2.style.width = wid;
+	//button3.style.width = wid;
+	//button4.style.width = wid;
+	//document.getElementById("mydiv").innerHTML = wid;
+	document.getElementById("ipt").value = localStorage.getItem("ip");
+
+
+	function navigate(str) {
+		window.location.href = str;
+	}
+
+	function set(){
+		var ip = document.getElementById('ipt').value;
+		
+		localStorage.setItem("ip", ip);
+	}
+
+</script>
+
+</body>
+</html>

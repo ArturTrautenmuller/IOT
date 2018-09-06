@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="L1.css">
+	<title>Lampada 1</title>
+</head>
+<body>
+	
+	<button id="state" value="desligado" onclick="ligar()" >desligado</button><br>
+	<input type="range" id="redValue" max="200" min="0" value="0" step="1">
+	<div id="red">73</div>
+
+	<input type="range" id="greenValue" max="200" min="0" value="0" step="1">
+	<div id="green">43</div>
+
+	<input type="range" id="blueValue" max="200" min="0" value="0" step="1">
+	<div id="blue">42</div>
+	<br><br>
+
+	
+<script >
+	function navigate(str) {
+		window.location.href = str;
+	}
+  // var base_add = "http://192.168.25.51/AtomBit/app_lamp_output.php";
+   var res = "";
+   var s;
+   var r= 0,g= 0,b = 0;
+   var last_r = 0,last_g = 0,last_b = 0,last_s = false;
+   var init = false;
+   var ip = localStorage.getItem("ip");
+
+	
+	var lampState = document.getElementById('state');
+	var redSlider = document.getElementById('redValue');
+	var greenSlider = document.getElementById('greenValue');
+	var blueSlider = document.getElementById("blueValue");
+
+
+	function ligar(){
+		var done = false;
+		if(lampState.value == "desligado" && !done){lampState.value = "ligado";lampState.innerHTML = "ligado";  done = true; s = true;}
+		if(lampState.value == "ligado" && !done){lampState.value = "desligado";lampState.innerHTML = "desligado"; done = true; s = false;}
+	}
+
+	function req(){
+	
+
+		   var xhttp;
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+      res = this.responseText;
+      init = true;
+      getData();
+        }
+    };
+    xhttp.open("GET", "http://"+ip+"/AtomBit/app_lamp_output.php?n=1", true);
+    xhttp.send(); 
+   document.getElementById("ip").innerHTML = res;
+   
+ 
+
+	}
+
+	function getData(){
+		var readn = false;
+		var readv = false;
+		var nome = "";
+		var value = "";
+		var len = res.length;
+		for(var i = 0; i < len; i++)
+		{
+			if(res.charAt(i) == "?"){readn = true; readv = false; i++;}
+			if(res.charAt(i) == "="){readn = false; readv = true; i++;}
+			if(res.charAt(i) == "&"){readn = true; readv = false; i++;
+				if(nome == "s"){if(value == "0"){s = false;} if(value == "1"){s = true;}}
+				if(nome == "r"){r = parseInt(value,10);}
+				if(nome == "g"){g = parseInt(value,10);}
+				if(nome == "b"){b = parseInt(value,10);}
+
+				nome = "";
+				value = "";
+			}
+			if(readn){nome += res.charAt(i);}
+			if(readv){value += res.charAt(i);}
+
+
+
+		}
+		//res = "";
+		change();
+
+	}
+	function change(){
+		if(s && lampState.value == "desligado"){lampState.value = "ligado";lampState.innerHTML = "ligado";}
+		if(!s && lampState.value == "ligado"){lampState.value = "desligado";lampState.innerHTML = "desligado";}
+		redSlider.value = r;
+		greenSlider.value = g;
+		blueSlider.value = b;
+		
+		run();
+	}
+	var ae = ""
+  function update(){
+  	
+		var add = "http://"+ip+"/AtomBit/app_lamp_input.php";
+		 add += "?n=1";
+		if(s){add += "&s=1";}
+		if(!s){add += "&s=0";}
+		add += "&r="+r+"&g="+g+"&b="+b;
+
+		 var yhttp;
+    yhttp = new XMLHttpRequest();
+    yhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+         
+        }
+    };
+    yhttp.open("GET", add , true);
+    yhttp.send(); 
+
+
+	}
+	
+	function search(){
+		var add = "http://"+ip+"/AtomBit/lamp_search.php";
+		 add += "?n=1";
+
+		 var zhttp;
+    zhttp = new XMLHttpRequest();
+    zhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+         ae = this.responseText;
+        }
+    };
+    zhttp.open("GET", add , true);
+    zhttp.send(); 
+
+	}
+
+
+	function run(){
+		if(init){search();}
+		if(init){r = redSlider.value};
+  		if(init)g = greenSlider.value;
+  		if(init)b = blueSlider.value
+		if(init){
+			if(r != last_r || g != last_g || b != last_b || s != last_s){update();}
+		}
+		document.getElementById("ip").innerHTML = r;
+		if(ae == "1"){s = true;}
+		if(ae == "0"){s = false;}
+		last_r = r;
+		last_s = s;
+		last_b = b;
+		last_g = g;
+		document.getElementById("red").innerHTML = redSlider.value/2;
+		document.getElementById("green").innerHTML = greenSlider.value/2;
+		document.getElementById("blue").innerHTML = blueSlider.value/2;
+
+		setTimeout(run,300);
+	}
+	
+
+	req();
+	
+
+
+</script>
+</body>
+</html>

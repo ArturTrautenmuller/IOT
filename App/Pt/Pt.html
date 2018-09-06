@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Portao</title>
+	<style>
+		#comando{
+	background-color: #fafafa;
+	border-color: #0ff; 
+	height: 450px;
+	width: 450px;
+	font-size: 75px;
+	font-family: Arial;
+	margin-left: 257px;
+	margin-top: 500px;
+	border-radius: 300px;
+	border-style: solid;
+	border-width: 10px;
+}
+
+	</style>
+</head>
+<body>
+<button id="comando" value="fechado" onclick="ligar()">Abrir</button>
+<script>
+var comando = document.getElementById('comando');
+function ligar(){
+		var done = false;
+		if(comando.value == "fechado" && !done){comando.value = "aberto";comando.innerHTML = "Fechar";  done = true; update(1);}
+		if(comando.value == "aberto" && !done){comando.value = "fechado";comando.innerHTML = "Abrir"; done = true; update(0); }
+	}
+
+var res;
+var ip = localStorage.getItem("ip");
+function search(){
+		var add = "http://"+ip+"/AtomBit/pt_output.php";
+
+		 var zhttp;
+    zhttp = new XMLHttpRequest();
+    zhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+         res = this.responseText;
+         change();
+
+        }
+    };
+    zhttp.open("GET", add , true);
+    zhttp.send(); 
+
+	}
+
+function change(){
+
+	if(res == "0"){comando.value = "fechado";comando.innerHTML = "Abrir";}
+	if(res == "1"){comando.value = "aberto";comando.innerHTML = "Fechar";}
+}
+
+function update(s){
+	var add = "http://"+ip+"/AtomBit/pt_input.php?s=";
+	add += s;
+
+
+		 var zhttp;
+    zhttp = new XMLHttpRequest();
+    zhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+
+        }
+    };
+    zhttp.open("GET", add , true);
+    zhttp.send(); 
+
+}
+
+search();
+
+
+
+</script>
+</body>
+</html>
