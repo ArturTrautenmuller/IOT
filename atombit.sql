@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 06-Set-2018 às 23:35
--- Versão do servidor: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: 29-Nov-2018 às 16:51
+-- Versão do servidor: 10.1.36-MariaDB
+-- versão do PHP: 7.2.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,31 +42,6 @@ CREATE TABLE `ar` (
 
 INSERT INTO `ar` (`n`, `state`, `work`, `temp`, `operation`) VALUES
 (1, 0, 0, 18, 'scda1');
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `empresa`
---
-
-CREATE TABLE `empresa` (
-  `mes` int(11) NOT NULL,
-  `ano` int(11) NOT NULL,
-  `receita total` double NOT NULL,
-  `cliente` varchar(20) NOT NULL,
-  `vendedor` varchar(20) NOT NULL,
-  `produto` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `empresa`
---
-
-INSERT INTO `empresa` (`mes`, `ano`, `receita total`, `cliente`, `vendedor`, `produto`) VALUES
-(1, 2018, 2000, 'gibeon', 'amanda', 'plano1'),
-(2, 2018, 2500, 'rafael', 'amanda', ''),
-(3, 2018, 2300, 'artur', 'ama', ''),
-(4, 2018, 2200, 'artur', 'amanda', 'plano2');
 
 -- --------------------------------------------------------
 
